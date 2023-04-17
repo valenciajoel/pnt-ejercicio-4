@@ -34,7 +34,48 @@ async function cocinarFideos(tiempoDeCoccion){
 
 cocinarFideos(4);
 
-
+function buscarUsuario(id){
+    if(id < 0 || id >= usuarios.length){
+        throw new Error ('El id es invalido');
+    }else{
+        return usuarios[id];
+    }
+}
 
 //EJERCICIO 3:
+let usuarios = [{nombre:"Pedro",publicaciones:["Hola soy Pedro","Trabajo en Google","Me gustan los perros"]},
+{nombre:"Pablo",publicaciones:["Hola soy Pedro","Trabajo en Azure","Me gustan los gatos"]}
+,{nombre:"Gustavo",publicaciones:["Hola soy Gustavo","Trabajo en Globant","Me gustan los perros"]}];
+async function obtenerUsuario(id){
+    const usuario = await new Promise((resolve)=> {
+        setTimeout(()=> {
+            resolve(buscarUsuario(id).nombre);
+        }, 1500);
+    });
+    console.log(usuario);
+    return usuario;
+}
+
+async function obtenerPublicaciones(idUsuario){
+    const publi = await new Promise((resolve)=> {
+        setTimeout(()=> {
+            resolve(buscarUsuario(idUsuario).publicaciones);
+        }, 1500);
+    });
+    console.log(publi);
+    return publi;
+}
+
+async function obtenerInfoCompletaUsuario(idUsuario) {
+    try {
+    const usuario =await obtenerUsuario(idUsuario);
+    const publicaciones = await obtenerPublicaciones(idUsuario);
+    console.log(`Nombre de usuario: ${usuario}`);
+    console.log(`Publicaciones del usuario: ${publicaciones. join(', ')}`);
+    } catch (error) {
+    console.error('Error:', error);
+    }
+    }
+    obtenerInfoCompletaUsuario(1);
+    
 
