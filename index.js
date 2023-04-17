@@ -90,3 +90,4 @@ Promise.all([
     console.log("Ejercicio 4");
     resultados.forEach(resultado => console.log(resultado));
 })
+
