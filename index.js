@@ -42,17 +42,18 @@ function buscarUsuario(id){
     }
 }
 
+const tiempo = 1500;
+
 //EJERCICIO 3:
 let usuarios = [{nombre:"Pedro",publicaciones:["Hola soy Pedro","Trabajo en Google","Me gustan los perros"]},
-{nombre:"Pablo",publicaciones:["Hola soy Pedro","Trabajo en Azure","Me gustan los gatos"]}
+{nombre:"Pablo",publicaciones:["Hola soy Pablo","Trabajo en Azure","Me gustan los gatos"]}
 ,{nombre:"Gustavo",publicaciones:["Hola soy Gustavo","Trabajo en Globant","Me gustan los perros"]}];
 async function obtenerUsuario(id){
     const usuario = await new Promise((resolve)=> {
         setTimeout(()=> {
             resolve(buscarUsuario(id).nombre);
-        }, 1500);
+        }, tiempo);
     });
-    console.log(usuario);
     return usuario;
 }
 
@@ -60,9 +61,8 @@ async function obtenerPublicaciones(idUsuario){
     const publi = await new Promise((resolve)=> {
         setTimeout(()=> {
             resolve(buscarUsuario(idUsuario).publicaciones);
-        }, 1500);
+        }, tiempo);
     });
-    console.log(publi);
     return publi;
 }
 
@@ -78,4 +78,15 @@ async function obtenerInfoCompletaUsuario(idUsuario) {
     }
     obtenerInfoCompletaUsuario(1);
     
+//EJERCICIO 4
 
+const usuarioPrincipal = 2;
+
+Promise.all([
+    obtenerUsuario(usuarioPrincipal),
+    obtenerPublicaciones(usuarioPrincipal),
+])
+.then((resultados) => {
+    console.log("Ejercicio 4");
+    resultados.forEach(resultado => console.log(resultado));
+})
